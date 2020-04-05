@@ -13,6 +13,7 @@ exp_limit=30
 date=$(date '+%d-%m-%Y %H:%M')
 debug="0"
 haproxy_cmd=$(which haproxyctl)
+ha_reload=$(service haproxy reload)
 
 function checkhaconf() {
     # manage configcheck and reload haproxy
@@ -22,7 +23,7 @@ function checkhaconf() {
         echo "critical: $date $? error in haproxy config" > ${nagios_log}
     else
         echo "config ok reload haproxy ${date}" >> ${logfile}
-        ${haproxy_cmd} reload
+        ${ha_reload}
         if [ "$?" -ne 0 ]; then
             echo "error reload haproxy ${date}" >> ${logfile}
             echo "critical: ${date} $? error reload haproxy" > $ ${nagios_log}
