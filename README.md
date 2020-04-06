@@ -1,4 +1,4 @@
-# renew cert or add new cert for letsencrypt using with haproxy
+# renew cert or add new cert for haproxy with letsencrypt
 
 * requirements haproxyctl
 * nagios log is just logging the last failed action in order to show error
