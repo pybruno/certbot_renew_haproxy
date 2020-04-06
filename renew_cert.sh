@@ -96,7 +96,7 @@ function findcert() {
             fi
 
         else
-            echo "${$date} new certificat need to add for haproxy" >> ${logfile}
+            echo "${date} new certificat need to add for haproxy" >> ${logfile}
             cat /etc/letsencrypt/live/${domain}/${fullchain} /etc/letsencrypt/live/${domain}/${priv_key} > ${cert_haproxy}${domain}.pem
             checkstate $? ${domain}
         fi
