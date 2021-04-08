@@ -82,14 +82,14 @@ function findcert() {
                         echo "${$date} The certificate for ${domain} is about to expire soon. Starting Let's Encrypt renewal script..." >> ${logfile}
                         echo "${$date} The certificate for ${domain} is about to expire soon. Starting Let's Encrypt renewal script..."
 
-                        ${certbot_bin} certonly --standalone --renew-by-default --http-01-port=8888 -d ${domain}
+                        ${certbot_bin} certonly --standalone --renew-by-default --http-01-port=8888 --cert-name ${domain}
                         cat /etc/letsencrypt/live/${domain}/${fullchain} /etc/letsencrypt/live/${domain}/${priv_key} > ${cert_haproxy}${domain}.pem
                         checkstate $? ${domain}
 
                     else
                         echo "mode debug do nothing"
                         # debug mode just dry_run
-                        $certbot_bin certonly --standalone --dry-run --renew-by-default --http-01-port=8888 -d ${domain}
+                        $certbot_bin certonly --standalone --dry-run --renew-by-default --http-01-port=8888 --cert-name ${domain}
                         checkstate $? ${domain}
                     fi
                 fi
